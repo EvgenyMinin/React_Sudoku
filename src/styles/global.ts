@@ -1,24 +1,26 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
 
 export default createGlobalStyle`
-  html {
-    height: 100%;
-
-    body {
-      display: flex;
-      flex-direction: column;
+  ${({ theme }) => css`
+    html {
       height: 100%;
-      margin: 0;
 
-      #root {
+      body {
         display: flex;
-        justify-content: center;
-        font-family: sans-serif;
-        background: radial-gradient(#282c34cc, #282c34);
-        color: #282c34;
+        flex-direction: column;
         height: 100%;
-        padding: 15px;
+        margin: 0;
+
+        #root {
+          display: flex;
+          justify-content: center;
+          font-family: sans-serif;
+          background: ${theme.colors.background};
+          color: ${theme.colors.white};
+          height: 100%;
+          padding: 15px;
+        }
       }
     }
-  }
+  `}
 `
