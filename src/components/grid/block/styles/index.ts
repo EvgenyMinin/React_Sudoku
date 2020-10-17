@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   ${({ theme }) => css`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex: 1 0 0;
     font-weight: bold;
