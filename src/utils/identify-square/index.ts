@@ -1,7 +1,7 @@
 import { SQUARE } from 'typings'
 import { IInput } from './types'
 
-export function identifySquare({ grid, col, row }: IInput): SQUARE {
+function identifySquare({ grid, col, row }: IInput): SQUARE {
   const square = []
 
   if (row < 3) {
@@ -38,3 +38,5 @@ export function identifySquare({ grid, col, row }: IInput): SQUARE {
 
   return square as SQUARE
 }
+
+export default identifySquare

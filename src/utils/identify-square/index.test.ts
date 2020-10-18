@@ -1,5 +1,5 @@
 import { GRID } from 'typings'
-import { identifySquare } from './'
+import identifySquare from './'
 
 describe('identifySquare', () => {
   it('identifies the correct square with a given grid, row index and column index', () => {
