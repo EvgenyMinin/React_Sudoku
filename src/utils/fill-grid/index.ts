@@ -8,21 +8,9 @@ import {
   shuffle,
 } from 'utils'
 
-const gridExample: GRID = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
-
 const numbers: NUMBERS[] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-function fillGrid(grid: any) {
+function fillGrid(grid: GRID) {
   let row = 0
   let col = 0
 
@@ -37,9 +25,13 @@ function fillGrid(grid: any) {
         if (!isInRow({ grid, row, value })) {
           if (!isInCol({ grid, col, value })) {
             const square = identifySquare({ grid, col, row })
-            if (!isInSquare({ square, value })) grid[row][col] = value
-            if (checkGrid(grid)) return true
-            else {
+            if (!isInSquare({ square, value })) {
+              grid[row][col] = value
+              if (checkGrid(grid)) {
+                return true
+              } else if (fillGrid(grid)) {
+                return true
+              }
             }
           }
         }
