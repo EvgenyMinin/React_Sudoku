@@ -29,6 +29,11 @@ function fillGrid(grid: any) {
       for (let value of numbers) {
         if (!isInRow({ grid, row, value })) {
           if (!isInCol({ grid, col, value })) {
+            const squre = [
+              [0, 0, 0],
+              [0, 0, 0],
+              [0, 0, 0],
+            ]
             grid[row][col] = value
           }
         }
