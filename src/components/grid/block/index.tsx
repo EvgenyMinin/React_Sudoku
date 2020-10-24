@@ -16,13 +16,12 @@ const Block: FC<IProps> = ({ rowIndex, colIndex }) => {
     value: grid ? grid[rowIndex][colIndex] : 0,
   }))
 
+  const { value, isActive } = state
   const dispatch = useDispatch<Dispatch<AnyAction>>()
 
   const handleClick = () => {
-    dispatch(selectedBlock([rowIndex, colIndex]))
+    if (!isActive) dispatch(selectedBlock([rowIndex, colIndex]))
   }
-
-  const { value, isActive } = state
 
   return (
     <Container
