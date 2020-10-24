@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
-  ${({ theme }) => css`
+import { IProps } from './types'
+
+export const Container = styled.div<IProps>`
+  ${({ active, theme }) => css`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +11,7 @@ export const Container = styled.div`
     font-weight: bold;
     font-size: 20px;
     height: auto;
-    background-color: ${theme.colors.white};
+    background-color: ${active ? theme.colors.blue : theme.colors.white};
     border: solid 1px ${theme.colors.black};
     transition: ${theme.transition};
     cursor: pointer;

@@ -1,10 +1,11 @@
-import { N } from 'typings'
+import { INDEX, N } from 'typings'
 
 export interface IProps {
-  rowIndex: number
-  colIndex: number
+  rowIndex: INDEX
+  colIndex: INDEX
 }
 
 export interface IState {
   value: N
+  isActive: boolean
 }
