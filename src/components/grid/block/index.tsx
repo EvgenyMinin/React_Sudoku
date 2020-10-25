@@ -9,12 +9,14 @@ import { IProps, IState } from './types'
 import { Container } from './styles'
 
 const Block: FC<IProps> = ({ rowIndex, colIndex }) => {
-  const state = useSelector<IReducer, IState>(({ grid, selectedBlock }) => ({
-    isActive: selectedBlock
-      ? selectedBlock[0] === rowIndex && selectedBlock[1] === colIndex
-      : false,
-    value: grid ? grid[rowIndex][colIndex] : 0,
-  }))
+  const state = useSelector<IReducer, IState>(
+    ({ workingGrid, selectedBlock }) => ({
+      isActive: selectedBlock
+        ? selectedBlock[0] === rowIndex && selectedBlock[1] === colIndex
+        : false,
+      value: workingGrid ? workingGrid[rowIndex][colIndex] : 0,
+    })
+  )
 
   const { value, isActive } = state
   const dispatch = useDispatch<Dispatch<AnyAction>>()
