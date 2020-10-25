@@ -1,7 +1,6 @@
 import React, { FC, Children, useCallback, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Dispatch, AnyAction } from 'redux'
-import { useHotkeys } from 'react-hotkeys-hook'
 
 import { INDEX } from 'typings'
 import { createGrid } from 'reducers'
@@ -17,27 +16,6 @@ const Grid: FC = () => {
   useEffect(() => {
     create()
   }, [create])
-
-  const moveDown = () => {
-    console.log('down')
-  }
-
-  const moveUp = () => {
-    console.log('up')
-  }
-
-  const moveLeft = () => {
-    console.log('left')
-  }
-
-  const moveRight = () => {
-    console.log('right')
-  }
-
-  useHotkeys('down', moveDown)
-  useHotkeys('up', moveUp)
-  useHotkeys('left', moveLeft)
-  useHotkeys('right', moveRight)
 
   return (
     <Container data-cy="grid-container">
