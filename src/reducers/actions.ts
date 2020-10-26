@@ -14,7 +14,7 @@ export const fillBlock = (value: NUMBERS, coords: BLOCK_COORDS): AnyAction => ({
   value,
 })
 
-export const selectedBlock = (coords: BLOCK_COORDS): AnyAction => ({
+export const selectBlock = (coords: BLOCK_COORDS): AnyAction => ({
   coords,
   type: types.SELECT_BLOCK,
 })
