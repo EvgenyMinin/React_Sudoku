@@ -2,8 +2,8 @@ import React, { FC, Children, useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Dispatch, AnyAction } from 'redux'
 
-import { INDEX } from 'typings'
-import { createGrid, IReducer, selectBlock } from 'reducers'
+import { INDEX, NUMBERS } from 'typings'
+import { createGrid, fillBlock, IReducer, selectBlock } from 'reducers'
 
 import { IState } from './types'
 import Block from './block'
@@ -11,15 +11,17 @@ import Block from './block'
 import { Container, Row } from './styles'
 
 const Grid: FC = () => {
-  const state = useSelector<IReducer, IState>(({ selectedBlock }) => ({
-    selectedBlock,
-  }))
+  const state = useSelector<IReducer, IState>(
+    ({ selectedBlock, workingGrid }) => ({
+      selectedBlock,
+      selectedValue:
+        workingGrid && selectedBlock
+          ? workingGrid[selectedBlock[0]][selectedBlock[1]]
+          : 0,
+    })
+  )
   const dispatch = useDispatch<Dispatch<AnyAction>>()
   const create = useCallback(() => dispatch(createGrid()), [dispatch])
-
-  useEffect(() => {
-    create()
-  }, [create])
 
   const moveUp = useCallback(() => {
     if (state.selectedBlock && state.selectedBlock[0] > 0) {
@@ -65,6 +67,51 @@ const Grid: FC = () => {
     }
   }, [dispatch, state])
 
+  const fill = useCallback(
+    (n: NUMBERS) => {
+      if (state.selectedBlock && state.selectedValue === 0) {
+        dispatch(fillBlock(n, state.selectedBlock))
+      }
+    },
+    [dispatch, state.selectedBlock, state.selectedValue]
+  )
+
+  const pressOne = useCallback(() => {
+    fill(1)
+  }, [fill])
+
+  const pressTwo = useCallback(() => {
+    fill(2)
+  }, [fill])
+
+  const pressThree = useCallback(() => {
+    fill(3)
+  }, [fill])
+
+  const pressFour = useCallback(() => {
+    fill(4)
+  }, [fill])
+
+  const pressFive = useCallback(() => {
+    fill(5)
+  }, [fill])
+
+  const pressSix = useCallback(() => {
+    fill(6)
+  }, [fill])
+
+  const pressSeven = useCallback(() => {
+    fill(7)
+  }, [fill])
+
+  const pressEight = useCallback(() => {
+    fill(8)
+  }, [fill])
+
+  const pressNine = useCallback(() => {
+    fill(9)
+  }, [fill])
+
   useEffect(() => {
     const handleKeyUp = (e: any) => {
       switch (e.keyCode) {
@@ -80,6 +127,42 @@ const Grid: FC = () => {
         case 39:
           moveRight()
           break
+        case 49:
+        case 97:
+          pressOne()
+          break
+        case 50:
+        case 98:
+          pressTwo()
+          break
+        case 51:
+        case 99:
+          pressThree()
+          break
+        case 52:
+        case 100:
+          pressFour()
+          break
+        case 53:
+        case 101:
+          pressFive()
+          break
+        case 54:
+        case 102:
+          pressSix()
+          break
+        case 55:
+        case 103:
+          pressSeven()
+          break
+        case 56:
+        case 104:
+          pressEight()
+          break
+        case 57:
+        case 105:
+          pressNine()
+          break
         default:
           break
       }
@@ -90,7 +173,26 @@ const Grid: FC = () => {
     return () => {
       document.removeEventListener('keyup', handleKeyUp)
     }
-  }, [moveDown, moveLeft, moveRight, moveUp, state])
+  }, [
+    moveDown,
+    moveLeft,
+    moveRight,
+    moveUp,
+    pressEight,
+    pressFive,
+    pressFour,
+    pressNine,
+    pressOne,
+    pressSeven,
+    pressSix,
+    pressThree,
+    pressTwo,
+    state,
+  ])
+
+  useEffect(() => {
+    create()
+  }, [create])
 
   return (
     <Container data-cy="grid-container">
