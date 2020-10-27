@@ -8,4 +8,5 @@ export interface IProps {
 export interface IState {
   value: N
   isActive: boolean
+  isPuzzle: boolean
 }

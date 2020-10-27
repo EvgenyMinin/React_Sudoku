@@ -3,12 +3,12 @@ import styled, { css } from 'styled-components'
 import { IProps } from './types'
 
 export const Container = styled.div<IProps>`
-  ${({ active, theme }) => css`
+  ${({ active, puzzle, theme }) => css`
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1 0 0;
-    font-weight: bold;
+    font-weight: ${puzzle && 'bold'};
     font-size: 20px;
     height: auto;
     background-color: ${active ? theme.colors.blue : theme.colors.white};

@@ -10,15 +10,17 @@ import { Container } from './styles'
 
 const Block: FC<IProps> = ({ rowIndex, colIndex }) => {
   const state = useSelector<IReducer, IState>(
-    ({ workingGrid, selectedBlock }) => ({
+    ({ challengeGrid, workingGrid, selectedBlock }) => ({
       isActive: selectedBlock
         ? selectedBlock[0] === rowIndex && selectedBlock[1] === colIndex
         : false,
+      isPuzzle:
+        challengeGrid && challengeGrid[rowIndex][colIndex] !== 0 ? true : false,
       value: workingGrid ? workingGrid[rowIndex][colIndex] : 0,
     })
   )
 
-  const { value, isActive } = state
+  const { value, isActive, isPuzzle } = state
   const dispatch = useDispatch<Dispatch<AnyAction>>()
 
   const handleClick = () => {
@@ -30,6 +32,7 @@ const Block: FC<IProps> = ({ rowIndex, colIndex }) => {
       data-cy={`block-${rowIndex}-${colIndex}`}
       key={colIndex}
       active={isActive}
+      puzzle={isPuzzle}
       onClick={handleClick}
     >
       {value === 0 ? '' : value}
