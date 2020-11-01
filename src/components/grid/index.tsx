@@ -12,12 +12,13 @@ import { Container, Row } from './styles'
 
 const Grid: FC = () => {
   const state = useSelector<IReducer, IState>(
-    ({ selectedBlock, workingGrid }) => ({
+    ({ selectedBlock, solvedGrid, workingGrid }) => ({
       selectedBlock,
       selectedValue:
         workingGrid && selectedBlock
           ? workingGrid[selectedBlock[0]][selectedBlock[1]]
           : 0,
+      solvedGrid,
     })
   )
   const dispatch = useDispatch<Dispatch<AnyAction>>()
@@ -191,8 +192,8 @@ const Grid: FC = () => {
   ])
 
   useEffect(() => {
-    create()
-  }, [create])
+    if (!state.solvedGrid) create()
+  }, [create, state.solvedGrid])
 
   return (
     <Container data-cy="grid-container">
